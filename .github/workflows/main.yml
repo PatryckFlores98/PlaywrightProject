@@ -1,0 +1,27 @@
+name: CI — Playwright BDD
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - uses: microsoft/playwright-github-action@v1
+        with: { with-deps: true }
+      - run: npx bddgen
+      - run: npx playwright test
+        env:
+          CI: true
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: playwright-report, path: report, retention-days: 7 }
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: test-results, path: test-results, retention-days: 7 }
