@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "types": [
+      "@playwright/test"
+    ],
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@elements/*": [
+        "src/pages/elements/*"
+      ],
+      "@actions/*": [
+        "src/pages/actions/*"
+      ],
+      "@pages/*": [
+        "src/pages/pages/*"
+      ]
+    }
+  },
+  "include": [
+    "features",
+    "steps",
+    "src",
+    "playwright.config.ts"
+  ]
+}
